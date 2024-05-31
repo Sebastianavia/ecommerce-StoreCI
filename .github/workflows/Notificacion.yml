@@ -15,7 +15,7 @@ jobs:
         with:
           status: starting
           channel: '#notificaciones'
-          message: 'Alerta, Se ha realizado cambios en el repositorio Admin/CI...'
+          message: 'Alerta, Se ha realizado cambios en el repositorio Store/CI...'
         if: always()
 
       - name: Notify Slack - Additional Message
