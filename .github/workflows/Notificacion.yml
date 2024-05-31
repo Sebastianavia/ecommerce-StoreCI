@@ -1,16 +1,27 @@
 name: cicd-workflow with slack integration
+
 on:
   push:
     branches: [ "master" ]
+
 jobs:
   job1:
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-    - uses: act10ns/slack@v2
-      with:
-        status: starting
-        channel: '#notificaciones'
-        message: Alerta, Se ha realizado cambios en el reposiorio Store/CI...
-      if: always()
+      - name: Notify Slack - Start
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#notificaciones'
+          message: 'Alerta, Se ha realizado cambios en el repositorio Admin/CI...'
+        if: always()
+
+      - name: Notify Slack - Additional Message
+        uses: act10ns/slack@v2
+        with:
+          status: custom
+          channel: '#notificaciones'
+          message: 'Se realizaron las pruebas unitarias.'
+        if: always()
