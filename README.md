@@ -4,6 +4,7 @@
 
 ### Descripción del Proyecto
 
+
 InnovaRetail Corp. está lanzando una avanzada plataforma de comercio electrónico diseñada para proporcionar una experiencia de usuario excepcional y optimizar la gestión interna. La plataforma contará con una tienda en línea integrada con un completo Sistema de Gestión de Contenidos (CMS) para gestionar eficientemente múltiples vendedores o tiendas, productos, categorías, imágenes, filtros y anuncios. Este proyecto demostrará prácticas ejemplares de DevOps, incluyendo la automatización de infraestructuras y procesos, estrategias de branching efectivas, gestión segura de secretos y una robusta arquitectura de microservicios.
 
 ### Integración Continua (CI) con GitHub Actions
