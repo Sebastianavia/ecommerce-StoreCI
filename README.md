@@ -15,6 +15,7 @@ Para garantizar que el proceso de desarrollo sea eficiente y confiable, implemen
 - Pruebas Automatizadas: Cada commit desencadenará una serie de pruebas automatizadas para asegurar la calidad y funcionalidad del código.
  
 - Integración: Las pruebas exitosas fusionarán los cambios en la rama principal, manteniendo una base de código estable.
+  
 
 ### Canal de Notificaciones
 
