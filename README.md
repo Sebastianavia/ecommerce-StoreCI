@@ -26,6 +26,7 @@ Alertas sobre cualquier problema detectado durante los procesos automatizados.
 Notificaciones
 Para configurar las notificaciones, utilizaremos las siguientes acciones de GitHub:
 
+
 Notificaciones en Slack: Utilizando notificacion/action-slack para enviar actualizaciones a un canal de Slack.
 
   
