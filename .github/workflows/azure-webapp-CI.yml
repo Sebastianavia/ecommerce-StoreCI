@@ -1,0 +1,49 @@
+name: Build and Deploy Container App
+on:
+  push:
+    branches:
+      - 'master'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Log in to Azure Container Registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: containerRegistryUnique.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: Build and push Docker image
+      run: |
+        docker build ./e-commerce-store -t containerRegistryUnique.azurecr.io/e-store1:0.0.${{ github.run_number }}
+        docker push containerRegistryUnique.azurecr.io/e-store1:0.0.${{ github.run_number }}
+
+    - name: Logout from Azure Container Registry
+      run: docker logout containerRegistryUnique.azurecr.io
+
+    - name: Check out the Deployment_ToDo_App repository
+      uses: actions/checkout@v2
+      with:
+        repository: camilogonzalez7424/ecommerce-CD
+        ref: "master"
+        path: deployment_repo
+        token: ${{ secrets.REPO_TOKEN }}
+        fetch-depth: 0
+        persist-credentials: true
+
+    - name: Update values.yml with new tag
+      run: |
+        cd deployment_repo/e-commerce-store
+        sed -i 's/tag: .*/tag: "0.0.${{ github.run_number }}"/' values.yaml
+        git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+        git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+        git add values.yaml
+        git commit -m "Update image tag to 0.0.${{ github.run_number }}"
+        git push
