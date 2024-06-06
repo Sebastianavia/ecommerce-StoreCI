@@ -1,1 +1,23 @@
+name: correcto slack integration
 
+on:
+  workflow_run:
+    workflows: ["Build and Deploy Container App"]
+    types:
+      - completed
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Slack - Start
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#notificaciones'
+          message: 'Se ha subido correctamente la imagen a Azure Container Registry...'
+        if: always()
+
+      
