@@ -21,18 +21,11 @@ Para garantizar que el proceso de desarrollo sea eficiente y confiable, implemen
 
 ### Canal de Notificaciones
 
-Estableceremos un canal de notificaciones (por ejemplo, Slack, Microsoft Teams) para recibir actualizaciones en tiempo real sobre el estado del pipeline de CI. Esto incluirá:
+Estableceremos un canal de notificaciones (Slack) para recibir actualizaciones en tiempo real sobre el estado del pipeline de CI. Esto incluirá:
 
 Notificaciones de éxito o fallo en las compilaciones.
 Alertas sobre cualquier problema detectado durante los procesos automatizados.
-Notificaciones
-Para configurar las notificaciones, utilizaremos las siguientes acciones de GitHub:
 
-
-Notificaciones en Slack: Utilizando notificacion/action-slack para enviar actualizaciones a un canal de Slack.
-
-  
----
 
 
 
