@@ -27,8 +27,36 @@ Notificaciones de éxito o fallo en las compilaciones.
 Alertas sobre cualquier problema detectado durante los procesos automatizados.
 
 
+---
 
 
-Al aprovechar GitHub Actions para CI y configurar un sistema robusto de notificaciones, aseguraremos que los procesos de desarrollo sean eficientes, transparentes y confiables. Esta configuración facilitará la colaboración eficiente y la entrega rápida de software de alta calidad para la avanzada plataforma de comercio electrónico de InnovaRetail Corp.
+Nuestro pipeline principal llamado build-acr.yml, define un flujo de trabajo automatizado que se ejecuta después de que otro flujo de trabajo específico ha terminado (el cual se encarga de notificar que la actualizació ha iniciado). Su propósito es construir y desplegar una aplicación en un contenedor utilizando GitHub Actions y Azure. Aquí está una explicación general de lo que hace este flujo de trabajo:
+
+### Activación del flujo de trabajo:
+
+Se activa cuando otro flujo de trabajo llamado "cicd-workflow with slack integration" se ha completado.
+
+### Configuración del entorno:
+
+Define un trabajo llamado build que se ejecuta en una máquina virtual con Ubuntu.
+
+### Pasos del trabajo:
+
+Chequeo del código: Descarga el código fuente del repositorio.
+
+Inicio de sesión en Azure Container Registry: Se autentica en el registro de contenedores de Azure usando credenciales almacenadas en secretos.
+
+Construcción y envío de la imagen Docker: Construye una imagen Docker del proyecto ubicado en ./e-commerce-admin y la sube al registro de contenedores de Azure con una etiqueta basada en el número de ejecución del flujo de trabajo.
+
+Cerrar sesión en Azure Container Registry: Cierra la sesión del registro de contenedores de Azure para mayor seguridad.
+
+Chequeo del repositorio de despliegue: Descarga otro repositorio específico para despliegues (Deployment_ToDo_App).
+
+Actualización del archivo de configuración: Modifica un archivo values.yaml en el repositorio de despliegue para usar la nueva etiqueta de imagen Docker, luego realiza un commit y empuja estos cambios de vuelta al repositorio.
+
+Este flujo de trabajo automatiza el proceso de construcción, etiquetado y despliegue de una aplicación basada en contenedores, asegurando que siempre se utilice la versión más reciente de la imagen Docker en los despliegues.
+
+
+
 
 
